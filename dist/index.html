@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <link href="../style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet">
+        <div class="header" id="header">
+            <div class="leftHeader">
+                <h1>Anything ToDo?</h1>
+            </div>
+            <div class="middleHeader">
+                <div id="imgDiv">
+                    <img id="icon" src="../images/icon.jpeg" alt="">
+                </Div>
+    
+            </div>
+            <div class="rightHeader">
+                <button id="createProject">Create Project</button>
+            </div>
+        </div>
+        <div class="content" id="content">
+            <div class="projectList">
+                <h2 class="projectTitle">Current Projects</h2>
+                <ul id="list">
+                    <li>Default Project</li>
+                    <li>Test</li>
+                </ul>
+            </div>
+            <div class="projectTasks">
+                <h1 id="projectTasksTitle">Project Tasks</h1>
+                <div class="flex-items">
+                    <h4> Example</h4>
+                    <div class="img-div"></div>
+                    <ul>
+                        <li>Date</li>
+                        <li>Days left</li>
+                    </ul>
+                </div>
+                <div class="flex-items"></div>
+                <div class="flex-items"></div>
+                <div class="flex-items"></div>
+
+            </div>
+            <div class="createTaskBtn"><span class="material-icons-outlined">
+                add_task
+                </span></div>
+            <div class="createProjectMoadel" id="projectMoadel">
+                <h4>Project Creation</h4>
+                <div class="flexdiv">
+                    <form>
+                        <label for="projectName" class="inputLabel">Project Name:</label>
+                        <input type="text" id="projectName" name="projectName">
+                    </form>
+                    
+                    <span class="material-icons-outlined" id="closebtn">
+                        highlight_off
+                        </span>
+                        <button id="createbtn">Create</button>
+
+                </div>
+            </div>
+            <div class="createTaskMoadel">
+                <h4>Task Creation</h4>
+                <div class="flexdiv">
+                    <form>
+                        <label for="tasksName">Task Name:</label>
+                        <input type="text" id="tasksName" name="tasksName">
+                        <label for="tasksDesc">Task Description:</label>
+                        <input type="text" id="tasksDesc" name="tasksDesc">
+                        <label for="tasksDate">Task Date:</label>
+                        <input type="date" id="tasksDate" name="tasksDate">
+                    </form>
+                    <span class="material-icons-outlined" id="closebtn">
+                        highlight_off
+                        </span>
+                    <button id="createbtn">Create</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="module" src="../src/index.js"></script>
+</html>
