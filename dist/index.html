@@ -22,26 +22,15 @@
             <div class="projectList">
                 <h2 class="projectTitle">Current Projects</h2>
                 <ul id="list">
-                    <li>Default Project</li>
-                    <li>Test</li>
+                   
                 </ul>
             </div>
-            <div class="projectTasks">
+            <div class="projectTasks" id="projectTasks">
                 <h1 id="projectTasksTitle">Project Tasks</h1>
-                <div class="flex-items">
-                    <h4> Example</h4>
-                    <div class="img-div"></div>
-                    <ul>
-                        <li>Date</li>
-                        <li>Days left</li>
-                    </ul>
-                </div>
-                <div class="flex-items"></div>
-                <div class="flex-items"></div>
-                <div class="flex-items"></div>
+                
 
             </div>
-            <div class="createTaskBtn"><span class="material-icons-outlined">
+            <div id="createTaskBtn" ><span class="material-icons-outlined">
                 add_task
                 </span></div>
             <div class="createProjectMoadel" id="projectMoadel">
@@ -52,28 +41,34 @@
                         <input type="text" id="projectName" name="projectName">
                     </form>
                     
-                    <span class="material-icons-outlined" id="closebtn">
+                    <span class="material-icons-outlined" class="closebtn" id="closebtn">
                         highlight_off
                         </span>
                         <button id="createbtn">Create</button>
 
                 </div>
             </div>
-            <div class="createTaskMoadel">
+            <div class="createTaskMoadel" id="createTaskMoadel"> 
                 <h4>Task Creation</h4>
                 <div class="flexdiv">
                     <form>
+                        <label for="selectProject">Choose a Project:</label>
+                        <select id="selectProject" class="select"></select>
+                        <br>
+    
                         <label for="tasksName">Task Name:</label>
                         <input type="text" id="tasksName" name="tasksName">
+                        <br>
                         <label for="tasksDesc">Task Description:</label>
                         <input type="text" id="tasksDesc" name="tasksDesc">
+                        <br>
                         <label for="tasksDate">Task Date:</label>
                         <input type="date" id="tasksDate" name="tasksDate">
                     </form>
-                    <span class="material-icons-outlined" id="closebtn">
+                    <span class="material-icons-outlined" id="taskclosebtn">
                         highlight_off
                         </span>
-                    <button id="createbtn">Create</button>
+                    <button id="createbtn" class="addTask">Create</button>
                 </div>
             </div>
         </div>
