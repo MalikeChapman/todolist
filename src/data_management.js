@@ -49,6 +49,37 @@ export const dataModule = (function (){
         }
     }
 
-    return {addProject, addTask, returnLocalStorage, checkTasks}
+    function deleteTask(task){
+        let obj = returnLocalStorage();
+        for(let i = 0; i < obj.length; i++){
+            for(let j = 0; j < obj[i].tasks.length; j++){
+                if((obj[i].tasks[j].name === task.name) && (obj[i].tasks[j].taskDate === task.date)){
+                    alert("we got here");
+                    console.log(obj[i].tasks[j]);
+                    obj[i].tasks.splice(j, 1);
+                    console.log(obj[i].tasks[j]);
+                    break;
+                }
+            }
+        }
+        storage = obj;
+        localStorage.setItem('projects', JSON.stringify(storage));
+
+    }
+
+    function deleteProject(project){
+        let obj = returnLocalStorage();
+        for(let i = 0; i < obj.length; i++){
+            if(obj[i].name === project){
+                obj.splice(obj[i], 1);
+                break;
+            }
+        }
+        storage = obj;
+        localStorage.setItem('projects', JSON.stringify(storage));
+
+    }
+
+    return {addProject, addTask, returnLocalStorage, checkTasks, deleteTask, deleteProject}
 
 })(document)

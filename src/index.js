@@ -10,13 +10,18 @@ const domManip = (function (){
     const addTaskBtn = document.getElementById("createTaskBtn");
     const createTaskBtn = document.getElementsByClassName("addTask");
     const selectList = document.getElementById("selectProject");
+    const deleteProjectBtn = document.getElementById("deleteProject");
+    const closeDeleteProject = document.getElementById("finishDeleteProjectMoadel");
     populateSelectList();
     populateProjectList();
     populateTaskOnLaunch();
-    const projectULList = document.getElementById("list").childNodes;
-    for(let i = 0; i < projectULList.length; i++){
-        projectULList[i].addEventListener('click', selectedTasks);
-    }
+
+//     const projectChildrenList = document.getElementById("list").childNodes;
+//     for(let a = 0; a < projectChildrenList.length; a++){
+//         projectChildrenList[a].addEventListener('click', displayCurrentProject(projectChildrenList[a].textContent));
+//     }
+  dataModule.checkTasks();
+
 
 
     
@@ -28,6 +33,12 @@ const domManip = (function (){
     addTaskBtn.addEventListener('click', displayCreateTasks);
     taskCloseBtn.addEventListener('click', closeCreateTasks);
     createTaskBtn[0].addEventListener('click', addTasksToMoadel);
+    deleteProjectBtn.addEventListener('click', deleteThisProject);
+    closeDeleteProject.addEventListener('click', () =>{
+        const deleteProjectMoadel = document.getElementById("deleteProjectMoadelBtn");
+        deleteProjectMoadel.style.visibility = "hidden";
+
+    });
 
 
     function displayCreateProject(){
@@ -70,33 +81,6 @@ const domManip = (function (){
         let newTask = taskModule.tasksFactory();
         dataModule.addTask(newTask);
         displayCurrentProject(newTask.projectName);
-        // const taskMoadel = document.getElementById("createTaskMoadel");
-        // const projectTasks = document.getElementById("projectTasks");
-        // taskMoadel.style.visibility = "hidden";
-        // let newDiv = document.createElement('div');
-        // let ul = document.createElement("ul");
-        // let nameTitle = document.createElement("h4");
-        // let dateli = document.createElement("li");
-        // let daysLeftli = document.createElement("li");
-        // let currentDate = new Date();
-        // currentDate = new Date(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`);
-        // let date2 = new Date(newTask.taskDate);
-        // let difference = date2 - currentDate;
-        // let days = Math.round(difference / (1000 * 3600 * 24));
-        // daysLeftli.textContent = `${days} days till due date`;
-        // if(days <= 1){
-        //     daysLeftli.style.color = "red";
-        // }
-
-
-        // nameTitle.textContent = `${newTask.name}`;
-        // dateli.textContent = `${newTask.taskDate}`;
-        // ul.appendChild(dateli);
-        // ul.appendChild(daysLeftli);
-        // newDiv.setAttribute('class', "flex-items");
-        // newDiv.appendChild(nameTitle);
-        // newDiv.appendChild(ul);
-        // projectTasks.appendChild(newDiv);
 
     }
 
@@ -117,7 +101,14 @@ const domManip = (function (){
         const localValues = JSON.parse(localStorage.getItem('projects'));
         localValues.forEach(element => {
             addProjectToListItems(element);
+           
         });
+
+        const projectList = document.getElementById("list").childNodes;
+        
+        for(let i = 0; i < projectList.length; i++){
+            projectList[i].addEventListener('click', displayProjectListener);
+        }
 
 
     }
@@ -145,6 +136,7 @@ const domManip = (function (){
     function repopulateTasks(task){
         const projectTasks = document.getElementById("projectTasks");
         let newDiv = document.createElement('div');
+        newDiv.setAttribute("project", `${task.projectName}`);
         let ul = document.createElement("ul");
         let nameTitle = document.createElement("h4");
         let dateli = document.createElement("li");
@@ -166,6 +158,12 @@ const domManip = (function (){
         newDiv.setAttribute('class', "flex-items");
         newDiv.appendChild(nameTitle);
         newDiv.appendChild(ul);
+        const deleteTheTask = document.createElement("span");
+        deleteTheTask.setAttribute("class", "material-icons-outlined");
+        deleteTheTask.textContent = "delete";
+        deleteTheTask.id = "deleteRadio";
+        deleteTheTask.addEventListener('click', deleteTheTaskFromList);
+        newDiv.appendChild(deleteTheTask);
         projectTasks.appendChild(newDiv);
 
 
@@ -201,6 +199,95 @@ const domManip = (function (){
             }
         }
     }
+
+    function displayProjectListener(){
+        clearTasks();
+        let obj = dataModule.returnLocalStorage();
+        for(let i = 0; i < obj.length; i++){
+            if(obj[i].name === this.textContent){
+                for(let j = 0; j < obj[i].tasks.length; j++){
+                    repopulateTasks(obj[i].tasks[j]);
+                }
+                break;
+            }
+        }
+
+
+
+
+    }
+
+    function taskOnClick(){
+        const popUpTaskMoadel = document.getElementById("popUpTaskMoadel");
+        popUpTaskMoadel.style.visibility = "visible";
+        let elementList = popUpTaskMoadel.childNodes;
+
+    }
+
+    function deleteTheTaskFromList(){
+        const parentDiv = this.parentNode;
+        const listOfChildren = parentDiv.childNodes;
+        let obj = {name: "", date: ""};
+        
+        for(let i = 0; i < listOfChildren.length; i++){
+            if(listOfChildren[i].nodeName === "H4"){
+                alert("this works");
+                obj.name = listOfChildren[i].textContent;
+
+            } else if(listOfChildren[i].tagName === "UL")
+            {
+                obj.date = listOfChildren[i].firstChild.textContent;
+                break;
+            }
+
+        }
+        dataModule.deleteTask(obj);
+        const projectTasks = document.getElementById("projectTasks");
+        projectTasks.removeChild(parentDiv);
+        dataModule.checkTasks();
+
+    }
+
+    function deleteThisProject(){
+        const deleteProjectMoadel = document.getElementById("deleteProjectMoadelBtn");
+        deleteProjectMoadel.style.visibility = "visible";
+        
+        const selectProjectMoadel = document.getElementById("selectProjectMoadel");
+        const finishBtn = document.getElementById("finishDeleteProjectMoadel");
+
+        let storage = dataModule.returnLocalStorage();
+        for(let i = 0; i < storage.length; i++){
+            if(storage[i].name === "default") continue;
+            let optionValue = document.createElement('option');
+            optionValue.setAttribute('value', `${storage[i].name}`);
+            optionValue.textContent = `${storage[i].name}`;
+            selectProjectMoadel.appendChild(optionValue);
+        }
+
+        finishBtn.addEventListener('click', () => {
+            let selectedTarget = selectProjectMoadel.options[selectProjectMoadel.selectedIndex].value;
+            dataModule.deleteProject(selectedTarget);
+            deleteProjectMoadel.style.visibility = "hidden";
+            removeFromProjectList(selectedTarget);
+
+
+        });
+
+    }
+
+    function removeFromProjectList(selectedTarget){
+        const list = document.getElementById("list");
+        const proj = list.childNodes;
+
+        for(let i = 0; i < proj.length; i++){
+            if(proj[i].textContent === selectedTarget){
+                list.removeChild(proj[i]);
+                break;
+            }
+        }
+
+    }
+
 
 
 

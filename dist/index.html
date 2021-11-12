@@ -15,7 +15,8 @@
     
             </div>
             <div class="rightHeader">
-                <button id="createProject">Create Project</button>
+                <button class="projectMethods" id="createProject">Create Project</button>
+                <button class="projectMethods" id="deleteProject">Delete Project</button>
             </div>
         </div>
         <div class="content" id="content">
@@ -71,6 +72,25 @@
                     <button id="createbtn" class="addTask">Create</button>
                 </div>
             </div>
+            <div class="taskMoadel" id="popUpTaskMoadel">
+                <h4 id="taskNameMoadel">AAA</h4>
+                <span id="taskDescriptionMoadel">BBB</span>
+                <span id="taskMoadelClose" class="material-icons-outlined">
+                    close
+                    </span>
+              
+            </div>
+            <div class="deleteProjectMoadel" id="deleteProjectMoadelBtn">
+                <select class="selectMoadel" id="selectProjectMoadel"></select>
+                <span id="closeProjectSelectMoadel" class="material-icons-outlined">
+                    close
+                </span>
+                <button id="finishDeleteProjectMoadel">Delete</button>
+                
+
+
+            </div>
+
         </div>
     </body>
     <script type="module" src="../src/index.js"></script>

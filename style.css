@@ -5,7 +5,7 @@ html{
 }
 .header{
     width: 100%;
-    background-color: white;
+    background-color: rgb(80, 50, 50);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -14,7 +14,7 @@ html{
     border: 3px solid black;
 }
 .leftHeader{
-border: 3px solid black;
+/* border: 3px solid black; */
 width: fit-content;
 height: 100%;
 }
@@ -36,16 +36,26 @@ height: 100%;
 
 
 .rightHeader{
-    border: 3px solid black;
     width: 30%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
  }
 
-#createProject{
-    height: 60px;
-    width: 100px;
-    display: block;
-    margin: 10px auto;
+.projectMethods{
+    
+    height: 30px;
+    width: 150px;
+    cursor: pointer;
+    margin: 40px auto;
+   
+}
+
+.projectMethods:hover{
+    background-color: rgb(202, 149, 84);
+    transform: scale(1.2);
 }
 
 .content{
@@ -212,7 +222,7 @@ h4 {
 }
 
 .createTaskMoadel{
-    /* visibility: hidden; */
+    visibility: hidden;
     width: 40%;
     height: fit-content;
     position: absolute;
@@ -248,4 +258,79 @@ h4 {
 
 .flex-items:hover{
     transform: scale(1.4);
+}
+
+.taskMoadel{
+    width: 40%;
+    height: 300px;
+    visibility: hidden;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(138, 127, 110);
+    left: 40%;
+    margin: 20px auto;
+}
+
+#taskMoadelClose{
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#taskDescriptionMoadel{
+    flex-basis: 60%;
+    width: 80%;
+    height: 80%;
+    text-align: center;
+    border: 2px solid black;
+    background-color: rgb(202, 195, 184);
+
+}
+#deleteRadio{
+    width: 50%;
+    text-align: center;
+    border: 2px dotted black;
+    margin: 10px 30px;
+}
+
+#deleteRadio:hover{
+    background-color: chocolate;
+}
+
+.deleteProjectMoadel{
+    height: fit-content;
+    width: 40%;
+    padding: 20px;
+    position: absolute;
+    top: 60px;
+    left: 40%;
+    margin: 20px auto;
+    background-color: rgb(37, 50, 75);
+    visibility: hidden;
+}
+.selectMoadel{
+    width: 70%;
+}
+#finishDeleteProjectMoadel{
+    width: 20%;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#finishDeleteProjectMoadel:hover{
+    background-color: rgb(110, 91, 91);
+    transform: scale(1.2);
+    
+}
+
+#closeProjectSelectMoadel{
+    position: absolute;
+    top: 0px;
+    right: 1px;
+    cursor: pointer;
+    
 }
